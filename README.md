@@ -9,7 +9,7 @@ TODO: Write a description here
    ```yaml
    dependencies:
      xlsxtream:
-       github: your-github-user/xlsxtream
+       github: halfdan/xlsxtream
    ```
 
 2. Run `shards install`
@@ -28,7 +28,7 @@ TODO: Write development instructions here
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/xlsxtream/fork>)
+1. Fork it (<https://github.com/halfdan/xlsxtream/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -36,4 +36,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [Fabian Becker](https://github.com/your-github-user) - creator and maintainer
+- [Fabian Becker](https://github.com/halfdan) - creator and maintainer
