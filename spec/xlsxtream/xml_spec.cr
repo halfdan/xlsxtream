@@ -35,7 +35,7 @@ module Xlsxtream
 
     it "does not escape valid XML characters" do
       safe_value = "\u{10000}\u{10FFFF}"
-      expected = safe_value 
+      expected = safe_value
       XML.escape_value(safe_value).should eq(expected)
     end
   end

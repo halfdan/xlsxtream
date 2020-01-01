@@ -45,9 +45,9 @@ module Xlsxtream
       sst = use_shared_strings ? @sst : nil
       sheet_id = @worksheets[name]
       @io.add("xl/worksheets/sheet#{sheet_id}.xml") do |io|
-          worksheet = Worksheet.new(io, sst, auto_format)
-          yield worksheet
-          worksheet.close
+        worksheet = Worksheet.new(io, sst, auto_format)
+        yield worksheet
+        worksheet.close
       end
       nil
     end
