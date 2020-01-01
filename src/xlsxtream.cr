@@ -1,6 +1,9 @@
-# TODO: Write documentation for `Xlsxtream`
 module Xlsxtream
   VERSION = "0.1.0"
-
-  # TODO: Put your code here
 end
+
+require "./xlsxtream/workbook"
+require "./xlsxtream/worksheet"
+require "./xlsxtream/columns"
+require "./xlsxtream/row"
+require "./xlsxtream/shared_string_table"
