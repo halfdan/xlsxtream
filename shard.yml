@@ -2,8 +2,9 @@ name: xlsxtream
 version: 0.1.0
 
 authors:
-  - Fabian Becker <fabian@secondmeasure.com>
+  - Fabian Becker <halfdan@xnorfz.de>
 
-crystal: 0.32.1
+description: |
+  A fast, streaming XLSX Spreadsheet Writer for Crystal
 
 license: MIT
