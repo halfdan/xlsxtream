@@ -5,11 +5,14 @@ require "./xml"
 
 require "./shared_string_table"
 require "./worksheet"
+require "./font"
 
 module Xlsxtream
   class Workbook
-    def self.open(output : String)
-      workbook = new(output)
+    DEFAULT_FONT = Font.new("Calibri", 12, FontFamily::SWISS)
+
+    def self.open(output : String, *, font = DEFAULT_FONT)
+      workbook = new(output, font)
       begin
         yield workbook
       ensure
@@ -17,11 +20,11 @@ module Xlsxtream
       end
     end
 
-    def self.open(output : String) : Workbook
-      new(output)
+    def self.open(output : String, *, font = DEFAULT_FONT) : Workbook
+      new(output, font)
     end
 
-    def initialize(@output : String)
+    def initialize(@output : String, @font : Font)
       @file = File.open(output, "wb")
       @io = Zip::Writer.new(@file)
       @sst = SharedStringTable.new
@@ -73,17 +76,6 @@ module Xlsxtream
     end
 
     private def write_styles
-      # font_options = @options.fetch(:font, {})
-      # font_size = font_options.fetch(:size, 12).to_s
-      font_size = 12.to_s
-      # font_name = font_options.fetch(:name, 'Calibri').to_s
-      font_name = "Calibri"
-      # font_family = font_options.fetch(:family, 'Swiss').to_s.downcase
-      font_family_id = 2
-      # font_family_id = FONT_FAMILY_IDS[font_family] or fail Error,
-      #   "Invalid font family #{font_family}, must be one of "\
-      #   + FONT_FAMILY_IDS.keys.map(&:inspect).join(', ')
-
       @io.add "xl/styles.xml" do |io|
         io << XML.header
         io << XML.strip(<<-XML)
@@ -94,9 +86,9 @@ module Xlsxtream
             </numFmts>
             <fonts count="1">
               <font>
-                <sz val="#{XML.escape_attr font_size}"/>
-                <name val="#{XML.escape_attr font_name}"/>
-                <family val="#{font_family_id}"/>
+                <sz val="#{XML.escape_attr @font.size.to_s}"/>
+                <name val="#{XML.escape_attr @font.name}"/>
+                <family val="#{@font.family.value}"/>
               </font>
             </fonts>
             <fills count="2">
